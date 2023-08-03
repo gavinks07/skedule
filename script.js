@@ -1,6 +1,6 @@
 // Sample data to simulate user and admin profiles
 let users = [];
-let admins = [];
+let admins = [{ username: 'mom', password: '1234' }];
 
 // Function to switch between sections
 function showSection(sectionId) {
@@ -16,10 +16,16 @@ document.getElementById('login-form').addEventListener('submit', (event) => {
     const username = event.target.elements.username.value;
     const password = event.target.elements.password.value;
 
-    // Implement login logic here
+    // Check if the admin is logging in
+    const isAdmin = admins.some((admin) => admin.username === username && admin.password === password);
 
-    // For demonstration, show the user profile section after successful login
-    showSection('profile-section');
+    if (isAdmin) {
+        // If admin login is successful, show the admin section
+        showSection('admin-section');
+    } else {
+        // For demonstration, show the user profile section after successful login (assuming the user login logic is implemented elsewhere)
+        showSection('profile-section');
+    }
 });
 
 // User registration logic
