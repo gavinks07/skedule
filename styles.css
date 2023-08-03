@@ -1,0 +1,30 @@
+/* Basic styling for the user profile section */
+#profile-section {
+    display: none; /* Hide the profile section by default */
+}
+
+#profile-section .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#profile-section .profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    margin-bottom: 10px;
+}
+
+#profile-section .profile-username {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#profile-section .profile-info {
+    font-size: 16px;
+    color: #555;
+}
