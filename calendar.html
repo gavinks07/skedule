@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calendar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    #calendar {
+      border-collapse: collapse;
+      width: 50%;
+      margin: 0 auto;
+    }
+
+    #calendar th,
+    #calendar td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    #calendar th {
+      background-color: #f2f2f2;
+    }
+
+    #calendar td {
+      cursor: pointer;
+    }
+
+    #calendar td:hover {
+      background-color: #f9f9f9;
+    }
+  </style>
+  <script>
+    function updateCalendar() {
+      const now = new Date();
+
+      const calendar = document.getElementById("calendar");
+      const dateRow = calendar.insertRow(2); // Insert a new row for the date
+
+      for (let i = 0; i < 7; i++) {
+        const cell = dateRow.insertCell(i);
+        cell.textContent = now.getDate();
+        now.setDate(now.getDate() + 1);
+      }
+
+      // Update the month name and year in the calendar header
+      calendar.rows[0].cells[0].setAttribute("colspan", 7);
+      calendar.rows[0].cells[0].textContent = now.toLocaleString("default", { month: "long" }) + " " + now.getFullYear();
+    }
+  </script>
+</head>
+<body onload="updateCalendar()">
+  <h1>Welcome to the Calendar</h1>
+  <table id="calendar">
+    <tr>
+      <th colspan="7">August 2023</th>
+    </tr>
+    <tr>
+      <th>Sun</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+    </tr>
+    <!-- ... (add more rows for other days of the month if needed) ... -->
+  </table>
+</body>
+</html>
