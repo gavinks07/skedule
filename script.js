@@ -2,12 +2,48 @@
 let users = [];
 let admins = [{ username: 'mom', password: '1234' }];
 
+// Shared calendar events
+const sharedEvents = [
+    {
+        title: 'Meeting with Team',
+        start: '2023-08-05 10:00:00',
+        end: '2023-08-05 11:30:00',
+    },
+    {
+        title: 'Lunch Break',
+        start: '2023-08-05 12:30:00',
+        end: '2023-08-05 13:30:00',
+    },
+    // Add more events as needed
+];
+
+// Function to initialize and display the shared calendar
+function showSharedCalendar() {
+    const calendarEl = document.getElementById('calendar');
+
+    // Initialize the FullCalendar
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        plugins: ['interaction', 'dayGrid'],
+        defaultView: 'dayGridMonth',
+        editable: false, // Set to true to allow users to interact with the calendar (e.g., drag events)
+        events: sharedEvents,
+    });
+
+    // Render the calendar
+    calendar.render();
+}
+
 // Function to switch between sections
 function showSection(sectionId) {
     document.querySelectorAll('section').forEach((section) => {
         section.style.display = 'none';
     });
     document.getElementById(sectionId).style.display = 'block';
+
+    // Show shared calendar when displaying the profile section
+    if (sectionId === 'profile-section') {
+        showSharedCalendar();
+    }
 }
 
 // User login logic
