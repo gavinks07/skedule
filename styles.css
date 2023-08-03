@@ -1,8 +1,39 @@
-/* Basic styling for the user profile section */
-#profile-section {
-    display: none; /* Hide the profile section by default */
+/* Basic styling for the user interface */
+
+/* Form styles */
+.form-container {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
 }
 
+.form-container h2 {
+    margin-bottom: 10px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.form-container button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #45a049;
+}
+
+/* Profile styles */
 #profile-section .profile-container {
     display: flex;
     flex-direction: column;
@@ -27,4 +58,21 @@
 #profile-section .profile-info {
     font-size: 16px;
     color: #555;
+}
+
+/* Admin panel styles */
+#admin-section {
+    display: none; /* Hide the admin section by default */
+}
+
+#admin-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#admin-section th,
+#admin-section td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
 }
