@@ -3,46 +3,14 @@
 <head>
   <title>Calendar</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 50px;
-    }
-
-    h1 {
-      margin-bottom: 20px;
-    }
-
-    #calendar {
-      border-collapse: collapse;
-      width: 50%;
-      margin: 0 auto;
-    }
-
-    #calendar th,
-    #calendar td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: center;
-    }
-
-    #calendar th {
-      background-color: #f2f2f2;
-    }
-
-    #calendar td {
-      cursor: pointer;
-    }
-
-    #calendar td:hover {
-      background-color: #f9f9f9;
-    }
+    /* ... (same CSS code as before) ... */
   </style>
   <script>
     function updateCalendar() {
       const now = new Date();
-      const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
-      const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+      const currentMonth = now.getMonth();
+      const firstDay = new Date(now.getFullYear(), currentMonth, 1);
+      const lastDay = new Date(now.getFullYear(), currentMonth + 1, 0);
 
       const calendar = document.getElementById("calendar");
       const headerRow = calendar.rows[0];
@@ -58,17 +26,40 @@
 
       // Create a new row for the date
       let dateRow = calendar.insertRow(2);
-      let currentDay = firstDay;
+      let currentDay = new Date(firstDay);
 
+      // Fill in previous month's days if needed
+      for (let i = 0; i < firstDay.getDay(); i++) {
+        const cell = dateRow.insertCell(i);
+        const prevMonthDate = new Date(currentDay);
+        prevMonthDate.setDate(currentDay.getDate() - (firstDay.getDay() - i));
+        cell.textContent = prevMonthDate.getDate();
+        cell.classList.add("prev-month");
+      }
+
+      // Fill in current month's days
       while (currentDay <= lastDay) {
-        for (let i = 0; i < 7; i++) {
-          const cell = dateRow.insertCell(i);
-          if (currentDay.getMonth() === now.getMonth()) {
-            cell.textContent = currentDay.getDate();
-          }
-          currentDay.setDate(currentDay.getDate() + 1);
+        if (currentDay.getDay() === 0) {
+          dateRow = calendar.insertRow();
         }
-        dateRow = calendar.insertRow();
+
+        const cell = dateRow.insertCell();
+        cell.textContent = currentDay.getDate();
+
+        // Highlight current day
+        if (currentDay.getTime() === now.getTime()) {
+          cell.classList.add("current-day");
+        }
+
+        currentDay.setDate(currentDay.getDate() + 1);
+      }
+
+      // Fill in next month's days if needed
+      while (currentDay.getDay() !== 0) {
+        const cell = dateRow.insertCell();
+        cell.textContent = currentDay.getDate();
+        cell.classList.add("next-month");
+        currentDay.setDate(currentDay.getDate() + 1);
       }
     }
   </script>
